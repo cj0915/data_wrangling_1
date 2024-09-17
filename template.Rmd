@@ -28,3 +28,54 @@ head(litter_df, 10)
 view(litter_df)
 ```
 
+##Import FAS Pups
+
+```{r}
+pup_df = read_csv("data_import_examples/data_import_examples/FAS_pups.csv")
+
+pup_df = janitor::clean_names(pup_df)
+
+pup_df
+```
+
+Also we can use absolute path in our computer
+
+
+## Look at read_csv options
+
+col_names and skip rows
+
+```{r}
+litter_df = 
+  read_csv(
+    file = "data_import_examples/data_import_examples/FAS_litters.csv",
+    col_names = FALSE,
+    skip = 2
+  )
+```
+
+What about missing data
+
+```{r}
+litter_df = 
+  read_csv(
+    file = "data_import_examples/data_import_examples/FAS_litters.csv",
+    na = c("NA", "", ".")
+  )
+
+litter_df = janitor::clean_names(litter_df)
+
+pull(litter_df, gd0_weight)
+```
+
+What if we code "group" as a factor variable?
+
+```{r}
+litter_df = 
+  read_csv(
+    file = "data_import_examples/data_import_examples/FAS_litters.csv",
+    na = c("NA", "", "."),
+    col_types = cols(Group = col_factor())
+  )
+```
+

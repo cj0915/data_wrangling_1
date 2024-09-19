@@ -1968,3 +1968,33 @@ arrange(litters_df, desc(gd0_weight))
     ## 47               0            9
     ## 48               0            9
     ## 49               0            8
+
+## PIPING
+
+Do not do this!
+
+``` r
+litters_df = 
+  read.csv(file = "data_import_examples/data_import_examples/FAS_litters.csv",
+           na = c("NA", "", "."))
+
+litters_df = janitor::clean_names(litters_df)
+
+litters_df = select(litters_df, -pups_born_alive)
+
+litters_df = filter(litters_df, group == 'Con7')
+
+litters_df = mutate(litters_df, wt_gain = gd18_weight - gd0_weight)
+```
+
+Do this!!!
+
+``` r
+litters_df = 
+  read.csv(file = "data_import_examples/data_import_examples/FAS_litters.csv",
+           na = c("NA", "", ".")) %>% 
+  janitor::clean_names()%>%
+  select(-pups_born_alive)%>%
+  filter(group == 'Con7')%>%
+  mutate(wt_gain = gd18_weight - gd0_weight)
+```

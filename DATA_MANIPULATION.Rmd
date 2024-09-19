@@ -1,0 +1,29 @@
+---
+title: "DATA MANIPULATION"
+author: "Chenyu"
+date: "2024-09-19"
+output: github_document
+---
+
+```{r setup, echo=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+This document is about data manipulation
+
+Import the two datasets that we are going to manipulate
+
+```{r}
+litters_df = 
+  read.csv(file = "data_import_examples/data_import_examples/FAS_litters.csv",
+           na = c("NA", "", "."))
+
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read_csv(file = "data_import_examples/data_import_examples/FAS_pups.csv",
+           na = c("NA", "", "."))
+
+pups_df = janitor::clean_names(pups_df)
+```
+
